@@ -13,13 +13,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "*",
-    // preflightContinue: true,
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: '*', // Aquí permites las solicitudes de este origen
+  optionsSuccessStatus: 200 // Algunos navegadores antiguos (IE11, varios SmartTVs) no manejan 204
+}))
 
 app.get("/", (req, res) => {
   const cookies = req.cookies;
