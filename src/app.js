@@ -13,10 +13,13 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({
-  origin: 'http://localhost:5173', // Aquí permites las solicitudes de este origen
-  optionsSuccessStatus: 200 // Algunos navegadores antiguos (IE11, varios SmartTVs) no manejan 204
-}))
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    // preflightContinue: true,
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   const cookies = req.cookies;
